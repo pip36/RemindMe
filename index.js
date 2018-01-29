@@ -3,8 +3,7 @@
 const
   express = require('express'),
   bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()), 
-  config = require('./config');
+  app = express().use(bodyParser.json())
 
 
 app.post('/webhook', (req, res) => {  
@@ -36,7 +35,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = config.VERIFY_TOKEN
+    let verifyToken = process.env.VERIFY_TOKEN
       
     // Parse the query params
     let mode = req.query['hub.mode'];
@@ -47,7 +46,7 @@ app.get('/webhook', (req, res) => {
     if (mode && token) {
     
       // Checks the mode and token sent is correct
-      if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+      if (mode === 'subscribe' && token === verifyToken) {
         
         // Responds with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
