@@ -3,7 +3,8 @@
 const
   express = require('express'),
   bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()); 
+  app = express().use(bodyParser.json()), 
+  config = require('./config');
 
 
 app.post('/webhook', (req, res) => {  
@@ -35,7 +36,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "abcd1234"
+    let VERIFY_TOKEN = config.VERIFY_TOKEN
       
     // Parse the query params
     let mode = req.query['hub.mode'];
